@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lesther Quimpan | Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,13 +28,13 @@
     <!-- HERO SECTION -->
     <header>
       <div class="hero-content-side">
-        <div class="profile-wrapper-side" id="profileWrapper">
-          <img src="images/pp.png" alt="Lesther Quimpan" class="profile-pic-side" id="profilePic">
-        </div>
         <div class="hero-text">
           <h1 class="name-animate">Lesther Quimpan</h1>
           <h3>BS Information Technology • Holy Cross of Davao College</h3>
           <p>Welcome to my online portfolio. Explore my educational tour experiences, academic achievements, certificates, and documented photos.</p>
+        </div>
+        <div class="profile-wrapper-side" id="profileWrapper">
+          <img src="images/sss.jpg" alt="Lesther Quimpan" class="profile-pic-side" id="profilePic">
         </div>
       </div>
     </header>
@@ -45,15 +46,16 @@
     </section>
   </main>
 
-  <!-- BOTTOM BUTTONS -->
-  <div class="btn-group-fixed">
-    <a href="journal.html" class="btn">Journal</a>
-    <a href="certificates.html" class="btn">Certificates</a>
-    <a href="photos.html" class="btn">Photos</a>
-    <a href="index.html" class="btn">Home</a>
+  <div class="modal" id="modal" onclick="closeModal()">
+    <img id="modalImg" alt="Expanded profile image">
   </div>
 
   <footer>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/waity29/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/waityq_/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
     <p>© 2025 Lesther Quimpan • BS Information Technology • Holy Cross of Davao College</p>
   </footer>
 

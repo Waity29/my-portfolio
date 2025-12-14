@@ -17,7 +17,7 @@ document.querySelectorAll('a').forEach(link => {
     });
   }
 });
-
+  
 // SHRINK NAVIGATION
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
@@ -197,3 +197,4 @@ window.addEventListener('resize',()=>{
 
 initParticles();
 animateParticles();
+
