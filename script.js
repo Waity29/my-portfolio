@@ -1,3 +1,101 @@
+
+
+// --- CONFIGURATION: WATT FOLDER ALBUM ---
+// The slideshow will now look for images inside your "watt" folder.
+// MAKE SURE these filenames match exactly what is inside your "watt" folder!
+const albumImages = [
+  'watt/1.jpg',   // Change these names to match your files
+  'watt/2.jpg',
+  'watt/7.jpg',
+  'watt/4.jpg',
+  'watt/8.jpg',
+  'watt/a (2).jpg',
+  'watt/f.jpg',
+  'watt/g.jpg',
+  'watt/h.jpg',
+  'watt/3.jpg',
+  'watt/5.jpg',
+  'watt/11.jpg'
+];
+
+let currentIndex = 0;
+let isSlideshowMode = false;
+
+// --- MODAL & SLIDESHOW FUNCTIONS ---
+
+// 1. Standard Zoom (For regular images)
+function openModal(src){
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const arrows = document.querySelectorAll('.slide-btn');
+
+  if(modal){  
+    isSlideshowMode = false; 
+    modal.style.display = 'flex';
+    modalImg.src = src;
+    
+    // Hide arrows for single images
+    if(arrows.length > 0) {
+      arrows.forEach(btn => btn.style.display = 'none');
+    }
+  }
+}
+
+// 2. Open Album Slideshow (For the Watt Album)
+function openAlbum(){
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const arrows = document.querySelectorAll('.slide-btn');
+
+  // Safety check
+  if (albumImages.length === 0) {
+    console.error("No images configured in albumImages list!");
+    return;
+  }
+
+  if(modal){
+    isSlideshowMode = true; 
+    currentIndex = 0; // Start at first image
+    modal.style.display = 'flex';
+    modalImg.src = albumImages[0]; 
+    
+    // Show arrows
+    if(arrows.length > 0) {
+      arrows.forEach(btn => btn.style.display = 'block');
+    }
+  }
+}
+
+// 3. Close Modal
+function closeModal(){ 
+  const modal = document.getElementById('modal'); 
+  if(modal) modal.style.display='none'; 
+}
+
+// 4. Next/Previous Slide Logic
+function changeSlide(n, event) {
+  if (event) event.stopPropagation(); // Prevent modal from closing
+  if (!isSlideshowMode) return; 
+
+  currentIndex += n;
+
+  // Loop functionality
+  if (currentIndex >= albumImages.length) currentIndex = 0;
+  if (currentIndex < 0) currentIndex = albumImages.length - 1;
+
+  document.getElementById('modalImg').src = albumImages[currentIndex];
+}
+
+// Keyboard Controls
+document.addEventListener('keydown', function(e) {
+  const modal = document.getElementById('modal');
+  if (modal && modal.style.display === 'flex' && isSlideshowMode) {
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+    if (e.key === 'ArrowRight') changeSlide(1);
+  }
+  if (e.key === 'Escape') closeModal();
+});
+
 // FADE IN ON PAGE LOAD
 window.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('fade-in');
@@ -197,4 +295,3 @@ window.addEventListener('resize',()=>{
 
 initParticles();
 animateParticles();
-

@@ -55,7 +55,7 @@ nav {
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 20px 50px;
   z-index: 1000;
@@ -164,15 +164,48 @@ header {
 }
 
 /* SECTIONS */
-section { max-width:1100px; margin:70px auto; background: transparent; padding:50px; border-radius:20px; box-shadow: none; }
+section { max-width:1200px; margin:70px auto; background: transparent; padding:50px; border-radius:20px; box-shadow: none; }
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:25px; }
 .card { background: transparent; padding:25px; border-radius:18px; text-align:center; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s ease; cursor: pointer; }
 .card:hover { transform: scale(1.05); color: #38bdf8; }
 
-/* Card image styling (used on journal page) */
-.card .card-img { width: 100%; max-width: 320px; height: auto; border-radius: 12px; display: block; margin-bottom: 12px; cursor: pointer; }
+/* Card image styling (UPDATED for uniform size) */
+.card .card-img { 
+  width: 100%; 
+  max-width: 260px; 
+  height: 250px; /* Changed from 200px to 250px */
+  object-fit: cover; 
+  border-radius: 12px; 
+  display: block; 
+  margin-bottom: 12px; 
+  cursor: pointer; 
+}
 .card span { display: block; margin-top: 6px; }
-.gallery img { width:100%; border-radius:16px; cursor:pointer; transition: transform 0.3s; }
+
+/* Card wrapper and link (UPDATED for uniform size) */
+.card-wrapper { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.card-wrapper .card-img { 
+  width: 100%; /* Ensure full width */
+  max-width: 260px; 
+  height: 250px; /* Changed from 200px to 250px */
+  object-fit: cover; 
+  border-radius: 12px; 
+  display: block; 
+  cursor: pointer; 
+}
+.card-link { text-decoration: none; color: #fff; text-align: center; padding: 8px; transition: color 0.3s ease; }
+.card-link:hover { color: #38bdf8; }
+.card-link span { display: block; }
+
+/* Gallery Images (UPDATED for uniform size) */
+.gallery img { 
+  width:100%; 
+  height: 250px;      /* Added Fixed Height */
+  object-fit: cover;  /* Added Crop logic */
+  border-radius:16px; 
+  cursor:pointer; 
+  transition: transform 0.3s; 
+}
 .gallery img:hover { transform: scale(1.06); }
 
 /* Journal zoomable image */
@@ -180,14 +213,19 @@ section { max-width:1100px; margin:70px auto; background: transparent; padding:5
 .zoomable { max-width:480px; width:100%; border-radius:12px; cursor:pointer; transition: transform .3s ease, box-shadow .3s ease; }
 .zoomable:hover { transform: scale(1.03); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
 
-/* Grid-side: wrap cards normally (no horizontal scroll) */
+/* Grid-side: wrap cards normally (UPDATED) */
 .grid.grid-side {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
 }
 .grid.grid-side .card { display:flex; flex-direction:column; align-items:center; text-align:center; }
-.grid.grid-side .card .card-img { max-width: 100%; height: auto; margin-bottom: 8px; }
+.grid.grid-side .card .card-img { 
+  max-width: 260px; 
+  height: 250px; /* Changed from 200px to 250px */
+  object-fit: cover; 
+  margin-bottom: 8px; 
+}
 
 /* Carousel buttons */
 .carousel { position: relative; }
@@ -247,6 +285,38 @@ footer { color: #fff; text-align:center; padding:10px; }
   background: linear-gradient(135deg, #0ea5e9, #38bdf8);
 }
 
+/* Skills chips under About */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+/* Space between About paragraph and Skills heading */
+#about p { margin-bottom: 18px; }
+#about h3 { margin-top: 18px; margin-bottom: 6px; }
+.skill {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  color: #fff;
+  font-weight: 600;
+  transition: transform 0.18s ease;
+}
+.skill i { color: #38bdf8; font-size: 1.6rem; }
+.skill span { font-size: 0.85rem; letter-spacing: 0.5px; margin-top: 2px; }
+.skill:hover { transform: translateY(-6px) scale(1.03); }
+.skill .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 640px) {
+  .skills { justify-content: center; }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .hero-content-side { flex-direction: column; gap: 40px; }
@@ -257,4 +327,40 @@ footer { color: #fff; text-align:center; padding:10px; }
   header { padding: 60px 20px 40px 20px; }
   .profile-wrapper-side { width: 280px; height: 280px; }
   .hero-text h1 { font-size: 2rem; }
+}   
+
+/* --- SLIDESHOW BUTTONS & ARROWS --- */
+.slide-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px; /* Made bigger */
+  transition: 0.3s ease;
+  user-select: none;
+  z-index: 1001;
+  display: none; /* Hidden by default */
+  background-color: rgba(0, 0, 0, 0.3); /* Dark bg for visibility */
+  border-radius: 5px;
+}
+
+.next { right: 10px; }
+.prev { left: 10px; }
+
+.slide-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #38bdf8; /* Your Neon Blue */
+  transform: scale(1.1);
+}
+
+/* Ensure modal image fits nicely */
+.modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
 }

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesther Quimpan | Journal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Lesther - Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +13,6 @@
   <canvas id="bgCanvas"></canvas>
 
   <nav>
-    <strong>Lesther Quimpan</strong>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="journal.html">Journal</a></li>
@@ -25,33 +25,50 @@
     <section>
       <h2>Educational Tour</h2> 
       <div class="grid grid-side">
-        <a href="https://www.facebook.com/rivanitcebu/" class="card">
+        <div class="card-wrapper">
           <img src="images/rivan.jpg" alt="rivan it cebu" class="card-img" onclick="openModal(this.src)">
-          <span>rivan it cebu</span>
-        </a>
-        <a href="https://www.facebook.com/UPCebuinIT" class="card">
-          <img src="images/rivan.jpg" alt="UP in IT Cebu Information Technoloy Center" class="card-img" onclick="openModal(this.src)">
-          <span>UP in IT Cebu Information Technoloy Center</span>
-        </a>
-        <a href="https://www.dynata.com/" class="card">
-          <img src="images/rivan.jpg" alt="Dynata Philippines Inc" class="card-img" onclick="openModal(this.src)">
-          <span>Dynata Philippines Inc</span>
-        </a>
-        <a href="https://mata.tours/" class="card">
-          <img src="images/rivan.jpg" alt="MATA technologies" class="card-img" onclick="openModal(this.src)">
-          <span>MATA technologies</span>
-        </a>
-        <a href="https://www.facebook.com/TaRSIER117/" class="card">
-          <img src="images/rivan.jpg" alt="T.A.R.S.I.E.R. 117" class="card-img" onclick="openModal(this.src)">
-          <span>T.A.R.S.I.E.R. 117</span>
-        </a>
+          <a href="https://www.facebook.com/rivanitcebu/" class="card-link"><span>Rivan it cebu</span></a>
+        </div>
+        <div class="card-wrapper">
+          <img src="images/i.jpg" alt="UP in IT" class="card-img" onclick="openModal(this.src)">
+          <a href="https://www.facebook.com/UPCebuinIT" class="card-link"><span>UP in IT Cebu</span></a>
+        </div>
+        <div class="card-wrapper">
+          <img src="images/dynata.webp" alt="Dynata" class="card-img" onclick="openModal(this.src)">
+          <a href="https://www.dynata.com/" class="card-link"><span>Dynata Philippines Inc</span></a>
+        </div>
+        <div class="card-wrapper">
+          <img src="images/mata.webp" alt="MATA" class="card-img" onclick="openModal(this.src)">
+          <a href="https://mata.tours/" class="card-link"><span>MATA technologies</span></a>
+        </div>
+        <div class="card-wrapper">
+          <img src="images/tarsier.jpg" alt="Tarsier" class="card-img" onclick="openModal(this.src)">
+          <a href="https://www.facebook.com/TaRSIER117/" class="card-link"><span>T.A.R.S.I.E.R. 117</span></a>
+        </div>
+        
+        <div class="card-wrapper">
+          <img src="watt/1.jpg" alt="journal" class="card-img" onclick="openAlbum()">
+          <a href="javascript:void(0)" onclick="openAlbum()" class="card-link"><span>Journal and Photos</span></a>
+        </div>
+
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Lesther Quimpan • BS Information Technology • Holy Cross of Davao College</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/waity29/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://github.com/Waity29" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/waityq_/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>©Lesther Quimpan • Holy Cross of Davao College</p>
   </footer>
+
+  <div id="modal" class="modal" onclick="closeModal()">
+    <span class="slide-btn prev" onclick="changeSlide(-1, event)">&#10094;</span>
+    <span class="slide-btn next" onclick="changeSlide(1, event)">&#10095;</span>
+    <img id="modalImg" alt="Expanded image">
+  </div>
 
   <script src="script.js"></script>
 </body>
