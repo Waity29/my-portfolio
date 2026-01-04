@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesther</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="certificates.html">Certificates</a></li>
+      <li><a href="photos.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header class="contact-hero">
+      <h1>Let's work together.</h1>
+    </header>
+
+    <section>
+      <div class="grid grid-side contact-grid">
+        <div class="contact-left">
+          <h4>EMAIL</h4>
+          <p class="contact-email">
+            <span aria-label="Email waityigop@gmail.com"><i class="fas fa-envelope"></i> waityigop@gmail.com</span>
+          </p>
+          <h4 style="margin-top: 20px;">PHONE</h4>
+          <p class="contact-phone">
+            <span aria-label="Phone +639949127257"><i class="fas fa-phone"></i> +639949127257</span>
+          </p>
+
+          
+        </div>
+
+        <div class="contact-right">
+          <form id="contactForm" class="contact-form" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your email" autocomplete="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" placeholder="Your message" required></textarea>
+
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/waity29/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://github.com/Waity29" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/waityq_/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>©Lesther Quimpan • Holy Cross of Davao College</p>
+  </footer>
+
+  <script src="watt/email.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

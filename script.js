@@ -295,3 +295,43 @@ window.addEventListener('resize',()=>{
 
 initParticles();
 animateParticles();
+
+// EMAILJS contact form handler
+(function(){
+  // Replace the placeholders below with your EmailJS credentials.
+  // - `YOUR_EMAILJS_USER_ID` (public key) from EmailJS dashboard
+  // - `YOUR_SERVICE_ID` and `YOUR_TEMPLATE_ID` from your EmailJS setup
+  try{
+    if(typeof emailjs !== 'undefined'){
+      emailjs.init('user123');
+    } else {
+      console.warn('EmailJS SDK not loaded. Contact form will not send.');
+    }
+  } catch(e){ console.warn('EmailJS init error', e); }
+
+  const form = document.getElementById('contactForm');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if(submitBtn) submitBtn.disabled = true;
+
+    if(typeof emailjs === 'undefined'){
+      alert('Email sending is not configured. Please set up EmailJS.');
+      if(submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
+    emailjs.sendForm('service_s','template_y', this)
+      .then(function(){
+        alert('Message sent — thank you!');
+        form.reset();
+        if(submitBtn) submitBtn.disabled = false;
+      }, function(error){
+        console.error('EmailJS error', error);
+        alert('Failed to send message. Please try again later.');
+        if(submitBtn) submitBtn.disabled = false;
+      });
+  });
+})();
