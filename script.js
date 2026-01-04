@@ -296,42 +296,67 @@ window.addEventListener('resize',()=>{
 initParticles();
 animateParticles();
 
-// EMAILJS contact form handler
+// Local-only contact form handler: show success notification without sending
 (function(){
-  // Replace the placeholders below with your EmailJS credentials.
-  // - `YOUR_EMAILJS_USER_ID` (public key) from EmailJS dashboard
-  // - `YOUR_SERVICE_ID` and `YOUR_TEMPLATE_ID` from your EmailJS setup
-  try{
-    if(typeof emailjs !== 'undefined'){
-      emailjs.init('user123');
-    } else {
-      console.warn('EmailJS SDK not loaded. Contact form will not send.');
-    }
-  } catch(e){ console.warn('EmailJS init error', e); }
-
   const form = document.getElementById('contactForm');
   if(!form) return;
+
+  // Create (or get) inline notice element below the form
+  function getNotice(){
+    let n = document.getElementById('contactNotice');
+    if(n) return n;
+    n = document.createElement('div');
+    n.id = 'contactNotice';
+    n.setAttribute('role','status');
+    n.setAttribute('aria-live','polite');
+    n.style.marginTop = '12px';
+    n.style.padding = '10px 12px';
+    n.style.borderRadius = '6px';
+    n.style.display = 'none';
+    n.style.fontSize = '14px';
+    n.style.maxWidth = '420px';
+    n.style.boxSizing = 'border-box';
+    form.parentNode.insertBefore(n, form.nextSibling);
+    return n;
+  }
+
+  const notice = getNotice();
+
+  function showNotice(text, status){
+    notice.textContent = text;
+    notice.style.display = 'block';
+    if(status === 'success'){
+      notice.style.background = '#e6ffed';
+      notice.style.color = '#0b6b2f';
+      notice.style.border = '1px solid #a6f0b0';
+    } else {
+      notice.style.background = '#fff0f0';
+      notice.style.color = '#8b1e1e';
+      notice.style.border = '1px solid #f0a6a6';
+    }
+    // auto-hide after 5s
+    clearTimeout(notice._hideTimer);
+    notice._hideTimer = setTimeout(()=>{ notice.style.display='none'; }, 5000);
+  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const submitBtn = form.querySelector('button[type="submit"]');
     if(submitBtn) submitBtn.disabled = true;
 
-    if(typeof emailjs === 'undefined'){
-      alert('Email sending is not configured. Please set up EmailJS.');
+    const name = (form.name && form.name.value || '').trim();
+    const email = (form.email && form.email.value || '').trim();
+    const message = (form.message && form.message.value || '').trim();
+
+    if(!name || !email || !message){
+      showNotice('Please fill in all fields.', 'error');
       if(submitBtn) submitBtn.disabled = false;
       return;
     }
 
-    emailjs.sendForm('service_s','template_y', this)
-      .then(function(){
-        alert('Message sent — thank you!');
-        form.reset();
-        if(submitBtn) submitBtn.disabled = false;
-      }, function(error){
-        console.error('EmailJS error', error);
-        alert('Failed to send message. Please try again later.');
-        if(submitBtn) submitBtn.disabled = false;
-      });
+    // Local-only success (no network)
+    showNotice('Message sent — thank you!', 'success');
+    form.reset();
+    if(submitBtn) submitBtn.disabled = false;
   });
 })();
